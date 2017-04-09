@@ -1,6 +1,6 @@
 {
   "name": "react-thailand-address-typeahead",
-  "version": "1.0.0-beta.5",
+  "version": "1.0.0-beta.6",
   "main": "dist/index.js",
   "repository": {
     "url": "git@github.com:zapkub/react-thailand-address-typeahead.git",
@@ -42,6 +42,7 @@
     "next": "^2.1.0",
     "standard-version": "^4.0.0",
     "style-loader": "^0.16.1",
+    "babel-cli": "^6.24.1",
     "webpack": "^2.3.3"
   },
   "config": {
@@ -55,12 +56,11 @@
     }
   },
   "peerDependencies": {
-    "jqljs": "https://github.com/zapkub/JQLjs.git",
     "react": "15.4.0",
-    "react-dom": "15.5.3",
-    "recompose": "0.23.0"
+    "react-dom": "15.5.3"
   },
   "dependencies": {
-    "babel-cli": "^6.24.1"
+    "jqljs": "https://github.com/zapkub/JQLjs.git",
+    "recompose": "0.23.0"
   }
 }
