@@ -1,0 +1,49 @@
+.typeahead-input-wrap {
+    position: relative;
+    width: 100%;
+}
+.typeahead input[type="text"], .typeahead-input-hint{
+    width: 100%;
+    box-sizing: border-box;
+    background: #fff;
+    color: #666;
+    border: 1px solid #e5e5e5;
+    padding: 8px 6px;
+    transition: 0.2s ease-in-out;
+    font-size: 16px;
+    transition-property: color, background-color, border;
+}
+.typeahead input[type="text"]:focus {
+    border-color: #1e87f0;
+    outline: none;
+}
+
+.typeahead-selector{
+    width: 100%;
+    border: 1px solid #eee;
+    border-top: none;
+}
+.typeahead ul {
+    padding: 0;
+    margin: 0;
+}
+.typeahead-selector li {
+    padding: 10px 5px;
+    background: #fff;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+}
+.tt-cursor,
+.typeahead-selector li:hover{
+    background: #f5f5f5;
+}
+.typeahead-input-hint {
+    opacity: 0.3 !important;
+    position: absolute;
+    width: 100%;
+    border: 1px solid rgba(0,0,0,0);
+    top:0;
+    left:0;
+    user-select: none;
+    pointer-events: none;
+}
