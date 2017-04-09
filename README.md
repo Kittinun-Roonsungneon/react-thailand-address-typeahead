@@ -1,7 +1,7 @@
 # react-thailand-address-typeahead
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
-This project fork from
+This project fork from (jQuery free)
 [jquery.Thailand.js](https://github.com/earthchie/jquery.Thailand.js)
 
 ## Demo
