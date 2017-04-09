@@ -23,7 +23,6 @@ const AddressTypeaheadComponent = (props: AddressInputType) => {
     console.warn('No field type provide');
     return <div />;
   }
-  console.log(props);
   return (
     <Typeahead
       displayOption={props.renderResult}

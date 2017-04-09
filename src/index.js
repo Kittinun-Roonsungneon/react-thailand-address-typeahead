@@ -1,6 +1,5 @@
 // @flow
 import React from 'react';
-import { compose, withState } from 'recompose';
 import { fieldsEnum } from './finder';
 import AddressTypeahead from './AddressTypeahead.component';
 
