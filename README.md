@@ -44,6 +44,7 @@ For futher more see [Example](./example/index.js)
 | webpack with babili with data.json gzip | **86 KB** |
 
 ## Todo
+- MORE UNIT TEST
 - custom styles example
 - improve performance and reduce bundle size
 - `data.json` lazy loading
@@ -56,6 +57,9 @@ For futher more see [Example](./example/index.js)
 - run `npm install`
 - start development via storybook `npm run storybook`
 - navigate to `localhost:9001`
+
+## Testing
+- `npm test`
 
 ## Contribute
 - open for any pullrequest
