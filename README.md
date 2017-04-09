@@ -5,7 +5,7 @@ This project fork from
 [jquery.Thailand.js](https://github.com/earthchie/jquery.Thailand.js)
 
 ## Demo
-[Example with storybook]()
+[Example with storybook](http://zapkub.github.io/react-thailand-address)
 
 
 ## Requirement
