@@ -1,18 +1,21 @@
 // @flow
-import { compose, withState, withProps } from 'recompose';
+import { compose, withState, withProps, lifecycle, defaultProps } from 'recompose';
 import React, { Component } from 'react';
 
+import Typeahead from './Typeahead.component';
 import { resolveResultbyField } from './finder';
 
-const Typeahead = require('react-typeahead').Typeahead;
 
 type AddressInputType = {
-    // local state
-    searchStr: string;
-    option: string[];
+  // local state
+  searchStr: string;
+  option: string[];
 
-    // external props
-    fieldType: string;
+  // external props
+  fieldType: string;
+  value: string;
+  onOptionSelected: (option: any) => void;
+  renderResult: (data: any) => React.Component;
 }
 const AddressTypeaheadComponent = (props: AddressInputType) => {
   const { searchStr, setSearchStr, fieldType, options } = props;
@@ -20,24 +23,38 @@ const AddressTypeaheadComponent = (props: AddressInputType) => {
     console.warn('No field type provide');
     return <div />;
   }
+  console.log(props);
   return (
-    <div className="typeahead-input-wrap">
-      <Typeahead
-        options={options}
-        maxVisible={2}
-        value={searchStr}
-        onChange={e => setSearchStr(e.target.value)}
-      />
-      <input type="text" className="typeahead-input-hint" value={searchStr} />
-    </div>
+    <Typeahead
+      displayOption={props.renderResult}
+      filterOption={fieldType}
+      options={options}
+      maxVisible={5}
+      value={searchStr}
+      onChange={e => setSearchStr(e.target.value)}
+      onOptionSelected={option => props.onOptionSelected(option)}
+    />
   );
 };
 
 const AddressTypeahead: Component<AddressInputType> = compose(
-    withState('searchStr', 'setSearchStr', ''),
-    withProps(({ searchStr, fieldType }) => ({
-      options: resolveResultbyField(fieldType, searchStr),
-    })),
+  withState('searchStr', 'setSearchStr', ''),
+  lifecycle({
+    componentWillReceiveProps(nextProps) {
+      if (nextProps.value !== this.props.value) {
+        this.props.setSearchStr(nextProps.value);
+      }
+    },
+  }),
+  withProps(({ searchStr, fieldType }) => ({
+    options: resolveResultbyField(fieldType, searchStr),
+  })),
+  defaultProps(({
+    renderResult: data => (
+      <span>{`${data.d} » ${data.a} » ${data.p} » `}{data.z || <li>{'ไม่มีรหัสไปรษณีย์'}</li>}</span>
+    ),
+    value: '',
+  })),
 )(AddressTypeaheadComponent);
 
 export default AddressTypeahead;
