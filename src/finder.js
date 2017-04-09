@@ -53,7 +53,7 @@ const resolveResultbyField = (type: string, searchStr: string) => {
             .orderBy(type)
             .fetch();
   } catch (e) {
-    throw e;
+    return [];
   }
   return possibles;
 };
