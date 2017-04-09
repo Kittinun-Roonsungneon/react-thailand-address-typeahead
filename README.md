@@ -9,9 +9,8 @@ This project fork from
 
 
 ## Requirement
-- webpack
-- json-loader
 - react
+
 ## Installation
 ```
 $ npm install https://github.com/zapkub/JQLjs.git // will publish as module soon
@@ -19,6 +18,7 @@ $ npm install react react-thailand-address-typeahead
 ```
 
 ## Usage
+
 ```js
 import AddressFormTypeahead from 'react-thailand-address-typeahead';
 
@@ -30,6 +30,9 @@ export default () => (
     </div>
 )
 ```
+
+> NOTE: For component styles you can include or use loader `./dist/styles.css` to your app or implement by yourself [styles](./dist/styles.css)
+
 For futher more see [Example](./example/index.js)
 
 ## Performance for Perf nerd
