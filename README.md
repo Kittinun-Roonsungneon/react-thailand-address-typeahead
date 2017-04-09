@@ -51,9 +51,20 @@ For futher more see [Example](./example/index.js)
 - using without React example
 - using with google map example
 
-## Original fork
-[earthchie](https://github.com/earthchie/) - Project Owner, Original fork
+## Development
+- Clone this project
+- run `npm install`
+- start development via storybook `npm run storybook`
+- navigate to `localhost:9001`
 
+## Contribute
+- open for any pullrequest
+- Commitizen prefer !! 😎
+
+## Original fork and idea 
+
+[earthchie](https://github.com/earthchie/) - Project Owner, Original fork
+(you should treat him a bear 😎🍺)
 ## License
 - Original : WTFPL 2.0 http://www.wtfpl.net/
-- Also MIT
+- Also MIT (formally)
