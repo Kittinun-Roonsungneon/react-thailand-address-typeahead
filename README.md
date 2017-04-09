@@ -2,11 +2,11 @@
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
 This project fork from
+[jquery.Thailand.js](https://github.com/earthchie/jquery.Thailand.js)
 
 ## Demo
 [Example with storybook]()
 
-[jquery.Thailand.js](https://github.com/earthchie/jquery.Thailand.js)
 
 ## Requirement
 - webpack

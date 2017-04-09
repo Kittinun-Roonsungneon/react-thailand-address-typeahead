@@ -52,7 +52,7 @@
       "\\.js$": "./__test__/flow-type-strip.register.js"
     }
   },
-  "dependencies": {
+  "peerDependencies": {
     "jest": "^19.0.2",
     "jqljs": "https://github.com/zapkub/JQLjs.git",
     "json-query": "^2.2.2",
