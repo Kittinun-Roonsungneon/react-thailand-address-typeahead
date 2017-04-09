@@ -1,7 +1,7 @@
 {
   "name": "react-thailand-address-typeahead",
   "version": "1.0.0-beta.1",
-  "main": "index.js",
+  "main": "src/index.js",
   "repository": {
     "url": "git@github.com:zapkub/jquery.Thailand.js.git",
     "type": "git"
