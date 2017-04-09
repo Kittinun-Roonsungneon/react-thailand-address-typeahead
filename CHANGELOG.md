@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.0.0-beta.5"></a>
+# [1.0.0-beta.5](https://github.com/zapkub/react-thailand-address-typeahead/compare/v1.0.0-beta.4...v1.0.0-beta.5) (2017-04-09)
+
+
+
 <a name="1.0.0-beta.4"></a>
 # [1.0.0-beta.4](https://github.com/zapkub/react-thailand-address-typeahead/compare/v1.0.0-beta.3...v1.0.0-beta.4) (2017-04-09)
 
