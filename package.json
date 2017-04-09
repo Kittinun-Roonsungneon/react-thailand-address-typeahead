@@ -1,6 +1,6 @@
 {
   "name": "react-thailand-address-typeahead",
-  "version": "1.0.0-beta.2",
+  "version": "1.0.0-beta.3",
   "main": "dist/index.js",
   "repository": {
     "url": "git@github.com:zapkub/react-thailand-address-typeahead.git",
@@ -11,7 +11,7 @@
     "release": "standard-version",
     "test": "jest",
     "build": "babel src --out-dir dist --copy-files",
-    "webpack":"webpack",
+    "webpack": "webpack",
     "storybook": "start-storybook -p 9001 -c .storybook",
     "export": "build-storybook -c .storybook -o .out"
   },
