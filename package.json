@@ -1,0 +1,54 @@
+{
+  "name": "react-thailand-address-typeahead.js",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": {
+    "url": "git@github.com:zapkub/jquery.Thailand.js.git",
+    "type": "git"
+  },
+  "scripts": {
+    "test": "jest",
+    "storybook": "start-storybook -p 9001 -c .storybook"
+  },
+  "author": "Rungsikorn Rungsikavarnich <rungsikorn@me.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@kadira/storybook": "^2.35.3",
+    "babel-eslint": "^7.2.1",
+    "babel-plugin-transform-flow-strip-types": "^6.22.0",
+    "commitizen": "^2.9.6",
+    "cz-conventional-changelog": "^2.0.0",
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb": "^14.1.0",
+    "eslint-config-clogii": "^1.0.1",
+    "eslint-plugin-flow-vars": "^0.5.0",
+    "eslint-plugin-flowtype": "^2.30.4",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^4.0.0",
+    "eslint-plugin-react": "^6.10.3",
+    "flow-remove-types": "^1.2.0",
+    "json-loader": "^0.5.4",
+    "next": "^2.1.0",
+    "standard-version": "^4.0.0",
+    "webpack": "^2.3.3"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "jest": {
+    "transform": {
+      "\\.js$": "./__test__/flow-type-strip.register.js"
+    }
+  },
+  "dependencies": {
+    "jest": "^19.0.2",
+    "jqljs": "https://github.com/zapkub/JQLjs.git",
+    "json-query": "^2.2.2",
+    "react": "15.4.0",
+    "react-dom": "^15.5.3",
+    "react-typeahead": "^2.0.0-alpha.5",
+    "recompose": "^0.23.0"
+  }
+}
