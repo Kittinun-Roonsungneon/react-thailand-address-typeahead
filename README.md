@@ -1,6 +1,5 @@
 # react-thailand-address-typeahead
 [![npm version](https://badge.fury.io/js/react-thailand-address-typeahead.svg)](https://badge.fury.io/js/react-thailand-address-typeahead)
-
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
 This project fork from
