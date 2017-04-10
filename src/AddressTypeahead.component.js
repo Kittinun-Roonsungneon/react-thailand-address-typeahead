@@ -12,6 +12,7 @@ type AddressInputType = {
   option: string[];
 
   // external props
+  placeholder: string;
   fieldType: string;
   value: string;
   onOptionSelected: (option: any) => void;
@@ -25,10 +26,11 @@ const AddressTypeaheadComponent = (props: AddressInputType) => {
   }
   return (
     <Typeahead
+      placeholder={props.placeholder}
       displayOption={props.renderResult}
       filterOption={fieldType}
       options={options}
-      maxVisible={5}
+      maxVisible={props.maxVisible}
       value={searchStr}
       onChange={e => setSearchStr(e.target.value)}
       onOptionSelected={option => props.onOptionSelected(option)}
@@ -53,6 +55,7 @@ const AddressTypeahead: Component<AddressInputType> = compose(
       <span>{`${data.d} » ${data.a} » ${data.p} » `}{data.z || <li>{'ไม่มีรหัสไปรษณีย์'}</li>}</span>
     ),
     value: '',
+    maxVisible: 10,
   })),
 )(AddressTypeaheadComponent);
 

@@ -10,10 +10,11 @@ type AddressFormInputPropType = {
         p: string;
         z: string;
     };
+    maxVisible: number;
     onAddressSelected: (addresObject) => void;
     renderResult: (data) => React.Component;
 }
-class AddressForm extends React.Component {
+export default class AddressForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -58,5 +59,7 @@ class AddressForm extends React.Component {
     </div>);
   }
 }
-
-export default AddressForm;
+export {
+  AddressTypeahead,
+  fieldsEnum,
+ };

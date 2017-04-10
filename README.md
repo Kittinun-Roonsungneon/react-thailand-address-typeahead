@@ -1,4 +1,6 @@
 # react-thailand-address-typeahead
+[![npm version](https://badge.fury.io/js/react-thailand-address-typeahead.svg)](https://badge.fury.io/js/react-thailand-address-typeahead)
+
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
 This project fork from
@@ -19,6 +21,11 @@ $ npm install react react-thailand-address-typeahead
 
 ## Usage
 
+### API
+- `onAddressSelected: function` - call on user pick address and return `AddressObject` param
+- `maxVisible: number` - maximum number of Hint list
+
+
 ```js
 import AddressFormTypeahead from 'react-thailand-address-typeahead';
 
@@ -30,6 +37,8 @@ export default () => (
     </div>
 )
 ```
+
+
 
 > NOTE: For component styles you can include or use loader `./dist/styles.css` to your app or implement by yourself [styles](./dist/styles.css)
 
@@ -44,13 +53,13 @@ For futher more see [Example](./example/index.js)
 | webpack with babili with data.json gzip | **86 KB** |
 
 ## Todo
-- MORE UNIT TEST
-- custom styles example
-- improve performance and reduce bundle size
-- `data.json` lazy loading
-- server-side implementation example
-- using without React example
-- using with google map example
+- [] MORE UNIT TEST
+- [] custom styles example
+- [] improve performance and reduce bundle size
+- [] `data.json` lazy loading
+- [] server-side implementation example
+- [] using without React example
+- [] using with google map example
 
 ## Development
 - Clone this project
@@ -63,12 +72,12 @@ For futher more see [Example](./example/index.js)
 
 ## Contribute
 - open for any pullrequest
-- Commitizen prefer !! 😎
+- Commitizen lover !! 😎
 
 ## Original fork and idea 
 
 [earthchie](https://github.com/earthchie/) - Project Owner, Original fork
-(you should treat him a bear 😎🍺)
+(you should treat him some bear 😎🍺)
 ## License
 - Original : WTFPL 2.0 http://www.wtfpl.net/
 - Also MIT (formally)

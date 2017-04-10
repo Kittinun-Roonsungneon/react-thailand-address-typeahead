@@ -1,3 +1,6 @@
+.typeahead {
+    font-family: Arial, Helvetica, sans-serif;
+}
 .typeahead-input-wrap {
     position: relative;
     width: 100%;
@@ -25,10 +28,12 @@
 }
 .typeahead ul {
     padding: 0;
+    position: absolute;
+    z-index: 2;
     margin: 0;
 }
 .typeahead-selector li {
-    padding: 10px 5px;
+    padding: 10px 15px;
     background: #fff;
     border-bottom: 1px solid #eee;
     cursor: pointer;

@@ -1,46 +1,101 @@
 import React from 'react';
 import { storiesOf, action } from '@kadira/storybook';
 import { withState } from 'recompose';
-import AddressForm from '../src/index';
+import AddressForm, { AddressTypeahead } from '../src/index';
 
 import '../src/styles.css';
 
-storiesOf('Component', module)
-  .add('montage', () => (
+storiesOf('AddressForm Component', module)
+  .addWithInfo('Simple usage',
+  `
+    ## Enum
+    \`\`\`
+    const fieldsEnum = {
+      DISTRICT: 'd',
+      AMPHOE: 'a',
+      PROVINCE: 'p',
+      ZIPCODE: 'z',
+    };
+    \`\`\`
+    ## Simple usage
+    \`import AddressForm from '../src/index';\`
+  `, () => (
     <div style={{ width: 350 }}>
-      <AddressForm onAddressSelected={action('onSelectedAdress')} />
-      <code>{'<AddressForm onAddressSelected={action(\'onSelectedAdress\')} />'}</code>
+      <AddressForm
+        maxVisible={20}
+        onAddressSelected={action('onSelectedAdress')}
+      />
     </div>
-  ))
-  .add('handle result', () => {
+  ), { inline: true })
+  .addWithInfo('with handle result state',
+  `
+    ## with Recompose style
+    \`\`\`js
     const WithStateComponent = withState('result', 'setResult', null)(({ result, setResult }) => (
       <div style={{ width: 350 }}>
         <div>
-          selected : {result ? `${result.p} ${result.a} ${result.d} ${result.z}` : null}
+          selected : {result ? \`\${result.p} \${result.a} \${result.d} \${result.z}\` : null}
         </div>
         <AddressForm onAddressSelected={address => setResult(address)} />
       </div>
       ));
-    return (<div>
-      <WithStateComponent />
-      <code>
-        {`
-         <div style={{ width: 350 }}>
-          <div>
-            selected : {result ? \`\${result.p} \${result.a} \${result.d} \${result.z}\` : null}
-          </div>
-          <AddressForm onAddressSelected={address => setResult(address)} />
+    \`\`\`
+  `, () => {
+    const WithStateComponent = withState('result', 'setResult', null)(({ result, setResult }) => (
+      <div style={{ width: 350 }}>
+        <div style={{ color: 'red' }}>
+          ผลลัพธ์ : {result ? `${result.p} ${result.a} ${result.d} ${result.z}` : null}
         </div>
-        `}
-      </code>
-    </div>);
-  })
-  .add('custom render result', () => (
+        <AddressForm onAddressSelected={address => setResult(address)} />
+      </div>
+    ));
+    return (
+      <div>
+        <WithStateComponent />
+      </div>);
+  }, { inline: true })
+  .addWithInfo('with custom render result',
+  `
+    you can custom your result item by give a render function
+    \`\`\`
+    const renderResult = data => <b>{\`Hi \${data.p}:\${data.d} \${data.a}\`}</b>
+    \`\`\`
+  `,
+  () => (
     <div style={{ width: 400 }}>
       <AddressForm
         renderResult={data => <b>{`Hi ${data.p}:${data.d} ${data.a}`}</b>}
         onAddressSelected={action('onSelectedAdress')}
       />
     </div>
-  ));
+  ), { inline: true });
 
+
+storiesOf('AddressInput Component', module)
+  .addWithInfo('Simple usage',
+  `
+    \`\`\`
+    const WithStateComponent = withState(
+      'value', 'setValue', '',
+    )(({ value, setValue }) => (<AddressTypeahead
+      value={value}
+      renderResult={data => <b>{\`Hi \${data.p}:\${data.d} \${data.a}\`}</b>}
+      fieldType={'d'}
+      onOptionSelected={data => setValue(data.d)}
+    />))
+    \`\`\`
+  `, (() => {
+    const WithStateComponent = withState(
+      'value', 'setValue', '',
+    )(({ value, setValue }) => (<AddressTypeahead
+      value={value}
+
+      placeholder={'ตำบล...'}
+      renderResult={data => <b>{`Hi ${data.p}:${data.d} ${data.a}`}</b>}
+      fieldType={'d'}
+      onOptionSelected={data => setValue(data.d)}
+    />));
+    return (
+      <WithStateComponent />
+    );
+  }), { inline: true });

@@ -9,6 +9,7 @@ type TypeaheadInputType = {
     value: string;
     options: any[];
     filterOptions: string;
+    placeholder: string;
     onChange: (e: any) => void;
     onOptionSelected: (option: any) => void;
 
@@ -27,12 +28,14 @@ const Typeahead: React.Component<TypeaheadInputType> = compose(
 )((props: TypeaheadInputType) => (
   <div className="typeahead typeahead-input-wrap">
     <input
+      placeholder={props.placeholder}
       onBlur={() => setTimeout(() => props.setOpen(false), 400)}
       onFocus={() => props.setOpen(true)}
       type="text" value={props.value}
       onChange={props.onChange}
     />
-    { props.options.length && props.value.length ? <input
+
+    { props.open && props.options.length && props.value.length ? <input
       onChange={() => null}
       value={props.options[0][props.filterOption]}
       type="text" className="typeahead-input-hint"
