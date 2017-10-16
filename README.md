@@ -68,7 +68,7 @@ For futher more see [Example](./example/index.js)
 ## Original fork and idea 
 
 [earthchie](https://github.com/earthchie/) - Project Owner, Original fork
-(you should treat him a bear 😎🍺)
+(you should treat him a beer 😎🍺)
 ## License
 - Original : WTFPL 2.0 http://www.wtfpl.net/
 - Also MIT (formally)
