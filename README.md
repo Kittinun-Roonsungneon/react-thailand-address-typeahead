@@ -13,7 +13,6 @@ This project fork from
 
 ## Installation
 ```
-$ npm install https://github.com/zapkub/JQLjs.git // will publish as module soon
 $ npm install react react-thailand-address-typeahead
 ```
 
