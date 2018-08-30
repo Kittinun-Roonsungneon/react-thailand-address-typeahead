@@ -23,7 +23,7 @@ import AddressFormTypeahead from 'react-thailand-address-typeahead';
 
 export default () => (
     <div>
-        <AddressForm
+        <AddressFormTypeahead
          onAddressSelected={(addressObject) => console.log(addressObject)} 
         />
     </div>
