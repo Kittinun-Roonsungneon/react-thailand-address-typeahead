@@ -1,11 +1,11 @@
-import React, {
-  useCallback,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import React, { useCallback, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { ThailandAddressValue, typeaheadAddressContext, TypeaheadAdressContextData, useAddressTypeaheadContext } from "./context";
+import {
+  ThailandAddressValue,
+  typeaheadAddressContext,
+  TypeaheadAdressContextData,
+  useAddressTypeaheadContext,
+} from "./context";
 import {
   DatasourceItem,
   useThailandAddressDatasource,
@@ -20,30 +20,48 @@ const fieldMap: {
   subdistrict: "s",
 };
 
-
-
+type SuggestionPanelPropTypes = {
+  ds: DatasourceItem[];
+  shouldVisible: boolean;
+  onDatasourceItemSelected?: (ds: ThailandAddressValue) => void;
+  containerProps?: JSX.IntrinsicElements["ul"];
+  optionItemProps?: JSX.IntrinsicElements["li"];
+  highlightedItemIndex?: number;
+  onOptionMouseEnter?: (i: number) => void;
+};
 const SuggestionPanel = ({
   ds,
   shouldVisible,
   onDatasourceItemSelected,
-}: {
-  ds: DatasourceItem[];
-  shouldVisible: boolean;
-  onDatasourceItemSelected?: (ds: ThailandAddressValue) => void;
-}) => {
+  containerProps,
+  optionItemProps,
+  highlightedItemIndex,
+  onOptionMouseEnter,
+}: SuggestionPanelPropTypes) => {
   const onClick = (i: number) => (evt: React.MouseEvent) => {
     evt.stopPropagation();
     onDatasourceItemSelected?.(ThailandAddressValue.fromDatasourceItem(ds[i]));
   };
+  const onOptionMouseEnterCallback = (i: number) => () => {
+    onOptionMouseEnter?.(i);
+  };
   if (!shouldVisible) {
     return null;
   }
+  if (ds.length === 0) {
+    return null;
+  }
   return (
-    <ul>
+    <ul {...containerProps}>
       {ds.map((d, i) => {
         return (
           <li
+            {...optionItemProps}
+            className={`${highlightedItemIndex === i ? "highlighted " : ""}${
+              optionItemProps?.className || ""
+            }`}
             onMouseDown={onClick(i)}
+            onMouseEnter={onOptionMouseEnterCallback(i)}
             key={d.po + "_" + i}
           >{`${d.s} ${d.d} ${d.p} ${d.po}`}</li>
         );
@@ -54,15 +72,21 @@ const SuggestionPanel = ({
 
 const AddressInputField = (fieldName: keyof ThailandAddressValue) => {
   const InputComponent = (
-    innerProps: Omit<JSX.IntrinsicElements["input"], "value" | "onChange">
+    innerProps: Omit<JSX.IntrinsicElements["input"], "value" | "onChange"> & {
+      containerProps?: JSX.IntrinsicElements["div"];
+    }
   ) => {
     const {
       value,
       searchByField,
       onInputFieldChange,
       setSuggestions,
+      suggestions,
       setShouldDisplaySuggestion,
       setSuggestionContainerElem,
+      setHighlightedItemIndex,
+      highlightedItemIndex,
+      onValueChange,
     } = useAddressTypeaheadContext();
     const onInputChange = useCallback(
       (evt: React.ChangeEvent<HTMLInputElement>) => {
@@ -74,12 +98,49 @@ const AddressInputField = (fieldName: keyof ThailandAddressValue) => {
         setSuggestions(
           searchByField(fieldMap[fieldName], evt.currentTarget.value)
         );
+        setHighlightedItemIndex(-1);
       },
-      [onInputFieldChange, searchByField, setSuggestions]
+      [
+        onInputFieldChange,
+        searchByField,
+        setSuggestions,
+        setHighlightedItemIndex,
+      ]
     );
 
     const suggestPanelContainerRef = useRef<HTMLDivElement>(null);
 
+    const onKeydown = useCallback(
+      (evt: React.KeyboardEvent) => {
+        if (evt.key === "Escape") {
+          return setShouldDisplaySuggestion(false);
+        } else if (evt.key === "ArrowUp") {
+          return setHighlightedItemIndex(
+            highlightedItemIndex > 0 ? highlightedItemIndex - 1 : 0
+          );
+        } else if (evt.key === "ArrowDown") {
+          return setHighlightedItemIndex(
+            highlightedItemIndex < suggestions.length - 1
+              ? highlightedItemIndex + 1
+              : suggestions.length - 1
+          );
+        } else if (evt.key === "Enter") {
+          onValueChange?.(
+            ThailandAddressValue.fromDatasourceItem(
+              suggestions[highlightedItemIndex]
+            )
+          );
+          return setShouldDisplaySuggestion(false);
+        }
+      },
+      [
+        setShouldDisplaySuggestion,
+        setHighlightedItemIndex,
+        highlightedItemIndex,
+        suggestions,
+        onValueChange,
+      ]
+    );
     const onBlur = useCallback(() => {
       setShouldDisplaySuggestion(false);
     }, [setShouldDisplaySuggestion]);
@@ -88,12 +149,17 @@ const AddressInputField = (fieldName: keyof ThailandAddressValue) => {
       setSuggestionContainerElem(suggestPanelContainerRef.current);
     }, [setShouldDisplaySuggestion, setSuggestionContainerElem]);
 
+    const { containerProps, ...inputProps } = innerProps;
+
     return (
-      <div onBlur={onBlur} onFocus={onFocus}>
+      <div {...containerProps}>
         <input
-          {...innerProps}
+          {...inputProps}
+          onBlur={onBlur}
+          onFocus={onFocus}
           onChange={onInputChange}
           value={value[fieldName]}
+          onKeyDown={onKeydown}
         />
         <div ref={suggestPanelContainerRef} />
       </div>
@@ -113,7 +179,7 @@ export type ThailandAddressTypeaheadPropTypes = {
    * custom datasource will replace the default datasource
    * @see DatasourceItem to provide a right format
    */
-  datasouce?: DatasourceItem[]
+  datasouce?: DatasourceItem[];
 };
 
 export const ThailandAddressTypeahead = ({
@@ -127,6 +193,7 @@ export const ThailandAddressTypeahead = ({
   const [suggestionContainerElem, setSuggestionContainerElem] =
     useState<Element | null>(null);
   const [shouldDisplaySuggestion, setShouldDisplaySuggestion] = useState(false);
+  const [highlightedItemIndex, setHighlightedItemIndex] = useState(0);
 
   const onInputFieldChange = useCallback(
     (fieldName: keyof ThailandAddressValue, inputValue: string) => {
@@ -154,6 +221,8 @@ export const ThailandAddressTypeahead = ({
       setSuggestions,
       shouldDisplaySuggestion,
       setShouldDisplaySuggestion,
+      highlightedItemIndex,
+      setHighlightedItemIndex,
     };
   }, [
     value,
@@ -163,6 +232,7 @@ export const ThailandAddressTypeahead = ({
     suggestionContainerElem,
     suggestions,
     shouldDisplaySuggestion,
+    highlightedItemIndex,
   ]);
 
   return (
@@ -172,12 +242,21 @@ export const ThailandAddressTypeahead = ({
   );
 };
 
-const DefaultSuggestionPanel = () => {
+export type DefaultSuggestionPanelPropTypes = {
+  containerProps?: SuggestionPanelPropTypes["containerProps"];
+  optionItemProps?: SuggestionPanelPropTypes["optionItemProps"];
+};
+const DefaultSuggestionPanel = ({
+  containerProps,
+  optionItemProps,
+}: DefaultSuggestionPanelPropTypes) => {
   const {
     suggestionContainerElem,
     suggestions,
     shouldDisplaySuggestion,
     onValueChange,
+    highlightedItemIndex,
+    setHighlightedItemIndex,
   } = useAddressTypeaheadContext();
 
   if (!suggestionContainerElem) {
@@ -188,6 +267,10 @@ const DefaultSuggestionPanel = () => {
       ds={suggestions}
       shouldVisible={shouldDisplaySuggestion}
       onDatasourceItemSelected={onValueChange}
+      containerProps={containerProps}
+      optionItemProps={optionItemProps}
+      highlightedItemIndex={highlightedItemIndex}
+      onOptionMouseEnter={setHighlightedItemIndex}
     />,
     suggestionContainerElem
   );
@@ -203,21 +286,27 @@ type CustomSuggestionPanelPropTypes = {
 export const CustomSuggestionPanel = ({
   children,
 }: CustomSuggestionPanelPropTypes) => {
-  const { suggestionContainerElem, suggestions, shouldDisplaySuggestion, onValueChange } =
-    useAddressTypeaheadContext();
+  const {
+    suggestionContainerElem,
+    suggestions,
+    shouldDisplaySuggestion,
+    onValueChange,
+  } = useAddressTypeaheadContext();
 
-  const onSuggestionSelected = useCallback((nextVal: ThailandAddressValue) => {
-    onValueChange?.(nextVal)
-  }, [onValueChange])
+  const onSuggestionSelected = useCallback(
+    (nextVal: ThailandAddressValue) => {
+      onValueChange?.(nextVal);
+    },
+    [onValueChange]
+  );
 
   const ds = useMemo(() => {
     return suggestions.map(ThailandAddressValue.fromDatasourceItem);
-  }, [suggestions])
+  }, [suggestions]);
 
   if (!suggestionContainerElem) {
     return null;
   }
-
 
   return createPortal(
     children(ds, shouldDisplaySuggestion, onSuggestionSelected),
@@ -241,6 +330,4 @@ ThailandAddressTypeahead.SubdistrictInput = SubdistrictInput;
 ThailandAddressTypeahead.Suggestion = DefaultSuggestionPanel;
 ThailandAddressTypeahead.CustomSuggestion = CustomSuggestionPanel;
 
-export {
-  ThailandAddressValue,
-}
+export { ThailandAddressValue };

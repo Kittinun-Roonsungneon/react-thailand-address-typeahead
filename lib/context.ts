@@ -57,6 +57,9 @@ export type TypeaheadAdressContextData = {
 
   shouldDisplaySuggestion: boolean;
   setShouldDisplaySuggestion: (v: boolean) => void;
+
+  highlightedItemIndex: number;
+  setHighlightedItemIndex: (v: number) => void
 };
 
 export const typeaheadAddressContext =

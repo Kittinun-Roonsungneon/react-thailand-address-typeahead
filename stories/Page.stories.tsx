@@ -2,6 +2,8 @@ import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { ThailandAddressTypeahead, ThailandAddressValue } from "../lib";
 import { DatasourceItem } from "../lib/use-thailand-addr";
+import styled from "styled-components";
+import './Page.css'
 
 export default {
   title: "Thailand Address Typeahead",
@@ -17,16 +19,19 @@ const Template: ComponentStory<typeof ThailandAddressTypeahead> = (args) => {
     ThailandAddressValue.empty()
   );
   return (
-    <div>
+    <div className="basic address-input-container">
       <ThailandAddressTypeahead
         value={val}
         onValueChange={(val) => setVal(val)}
       >
-        <ThailandAddressTypeahead.SubdistrictInput placeholder="ตำบล / แขวง" />
-        <ThailandAddressTypeahead.DistrictInput placeholder="อำเภอ / เขต" />
-        <ThailandAddressTypeahead.ProvinceInput placeholder="จังหวัด" />
-        <ThailandAddressTypeahead.PostalCodeInput placeholder="รหัสไปรษณีย์" />
-        <ThailandAddressTypeahead.Suggestion />
+        {/* see CustomSuggestionUsage for create your own suggestion panel */}
+        <ThailandAddressTypeahead.Suggestion containerProps={{className: 'suggestion-container'}} optionItemProps={{className: 'suggestion-option'}} />
+
+        {/* you can custom layout here without touching the logic of the component */}
+        <ThailandAddressTypeahead.SubdistrictInput containerProps={{className: "address-input-field-container"}} className="address-input-field" placeholder="ตำบล / แขวง" />
+        <ThailandAddressTypeahead.DistrictInput containerProps={{className: "address-input-field-container"}} className="address-input-field" placeholder="อำเภอ / เขต" />
+        <ThailandAddressTypeahead.ProvinceInput containerProps={{className: "address-input-field-container"}} className="address-input-field" placeholder="จังหวัด" />
+        <ThailandAddressTypeahead.PostalCodeInput containerProps={{className: "address-input-field-container"}} className="address-input-field" placeholder="รหัสไปรษณีย์" />
       </ThailandAddressTypeahead>
       <br />
       <code>{JSON.stringify(val)}</code>
@@ -66,7 +71,7 @@ const Template2: ComponentStory<typeof ThailandAddressTypeahead> = (args) => {
 };
 export const CustomLayoutUsage = Template2.bind({});
 
-const Template3: ComponentStory<typeof ThailandAddressTypeahead> = (args) =>  {
+const Template3: ComponentStory<typeof ThailandAddressTypeahead> = (args) => {
   const [val, setVal] = React.useState<ThailandAddressValue>(
     ThailandAddressValue.empty()
   );
@@ -80,13 +85,17 @@ const Template3: ComponentStory<typeof ThailandAddressTypeahead> = (args) =>  {
         <ThailandAddressTypeahead.CustomSuggestion>
           {(suggestions, shouldDisplaySuggestion, onSuggestionSelected) => {
             if (!shouldDisplaySuggestion) {
-              return null
+              return null;
             }
             return (
-            <div style={{ background: 'blue'}}>
-              {suggestions.map((ds, i) => <div onMouseDown={() => onSuggestionSelected(ds)} key={i}>{ds.postalCode}</div>)}
-            </div>
-            )
+              <div style={{ background: "blue" }}>
+                {suggestions.map((ds, i) => (
+                  <div onMouseDown={() => onSuggestionSelected(ds)} key={i}>
+                    {ds.postalCode}
+                  </div>
+                ))}
+              </div>
+            );
           }}
         </ThailandAddressTypeahead.CustomSuggestion>
       </ThailandAddressTypeahead>
@@ -94,21 +103,22 @@ const Template3: ComponentStory<typeof ThailandAddressTypeahead> = (args) =>  {
       <code>{JSON.stringify(val)}</code>
     </div>
   );
-}
+};
 export const CustomSuggestionUsage = Template3.bind({});
 
-
 const customDatasource: DatasourceItem[] = [
-  { d: 'Khongteoy', p: 'Bangkok', po: '10110', s: 'Phrakanong'},
-  { d: 'Khongteoy', p: 'Bangkok', po: '10110', s: 'Khongteoy'},
-  { d: 'Phrakanong', p: 'Bangkok', po: '10110', s: 'Phrakanong'},
-]
+  { d: "Khongteoy", p: "Bangkok", po: "10110", s: "Phrakanong" },
+  { d: "Khongteoy", p: "Bangkok", po: "10110", s: "Khongteoy" },
+  { d: "Phrakanong", p: "Bangkok", po: "10110", s: "Phrakanong" },
+];
 const Template4 = () => {
-
   const [val, setVal] = React.useState<ThailandAddressValue>(
-    ThailandAddressValue.fromDatasourceItem(
-      { d: 'Khongteoy', p: 'Bangkok', po: '10110', s: 'Khongteoy'},
-    )
+    ThailandAddressValue.fromDatasourceItem({
+      d: "Khongteoy",
+      p: "Bangkok",
+      po: "10110",
+      s: "Khongteoy",
+    })
   );
   return (
     <div>
@@ -126,6 +136,93 @@ const Template4 = () => {
       <br />
       <code>{JSON.stringify(val)}</code>
     </div>
-  )
-}
+  );
+};
 export const CustomDatasourceUsage = Template4.bind({});
+
+export const CustomStyling = () => {
+  const [val, setVal] = React.useState<ThailandAddressValue>(
+    ThailandAddressValue.empty()
+  );
+  return (
+    <div>
+      <ThailandAddressTypeahead
+        value={val}
+        onValueChange={(val) => setVal(val)}
+      >
+        <ThailandAddressTypeahead.SubdistrictInput
+          style={{ borderRadius: 4, marginBottom: 4, fontSize: 18 }}
+          placeholder="ตำบล / แขวง"
+        />
+        <ThailandAddressTypeahead.DistrictInput
+          style={{ borderRadius: 4, marginBottom: 4, fontSize: 18 }}
+          placeholder="อำเภอ / เขต"
+        />
+        <ThailandAddressTypeahead.ProvinceInput
+          style={{ borderRadius: 4, marginBottom: 4, fontSize: 18 }}
+          placeholder="จังหวัด"
+        />
+        <ThailandAddressTypeahead.PostalCodeInput
+          style={{ borderRadius: 4, marginBottom: 4, fontSize: 18 }}
+          placeholder="รหัสไปรษณีย์"
+        />
+        <ThailandAddressTypeahead.Suggestion
+          containerProps={{ style: { border: "1px solid black" } }}
+          optionItemProps={{ style: { fontSize: 10, cursor: "pointer" } }}
+        />
+      </ThailandAddressTypeahead>
+      <br />
+      <code>{JSON.stringify(val)}</code>
+    </div>
+  );
+};
+
+const StyledContainer = styled.div`
+  .suggestion-container {
+    max-width: 300px;
+  }
+  .address-option {
+    cursor: pointer;
+    &:hover {
+      background-color: lightgrey;
+    }
+  }
+`;
+
+export const WithStyledComponent = () => {
+  const [val, setVal] = React.useState<ThailandAddressValue>(
+    ThailandAddressValue.empty()
+  );
+
+  // StyledContainer
+  // const StyledContainer = styled.div`
+  //   .suggestion-container {
+  //     max-width: 300px;
+  //   }
+  //   .address-option {
+  //     cursor: pointer;
+  //     &:hover {
+  //       background-color: lightgrey;
+  //     }
+  //   }
+  // `
+  return (
+    <StyledContainer>
+      <ThailandAddressTypeahead
+        value={val}
+        onValueChange={(val) => setVal(val)}
+      >
+        <ThailandAddressTypeahead.SubdistrictInput placeholder="ตำบล / แขวง" />
+        <ThailandAddressTypeahead.DistrictInput placeholder="อำเภอ / เขต" />
+        <ThailandAddressTypeahead.ProvinceInput placeholder="จังหวัด" />
+        <ThailandAddressTypeahead.PostalCodeInput placeholder="รหัสไปรษณีย์" />
+        <ThailandAddressTypeahead.Suggestion
+          containerProps={{ className: "suggestion-container" }}
+          optionItemProps={{ className: "address-option" }}
+        />
+      </ThailandAddressTypeahead>
+      <br />
+      <code>{JSON.stringify(val)}</code>
+    </StyledContainer>
+  );
+};
