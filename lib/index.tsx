@@ -165,7 +165,7 @@ const AddressInputField = (fieldName: keyof ThailandAddressValue) => {
       </div>
     );
   };
-  InputComponent.DisplayName = fieldName + "InputField";
+  InputComponent.displayName = fieldName + "InputField";
 
   return InputComponent;
 };

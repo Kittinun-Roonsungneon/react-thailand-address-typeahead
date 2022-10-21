@@ -1,6 +1,6 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import { ThailandAddressTypeahead, ThailandAddressValue } from "../lib";
+import { ThailandAddressTypeahead, ThailandAddressValue } from "../dist";
 import { DatasourceItem } from "../lib/use-thailand-addr";
 import styled from "styled-components";
 import './Page.css'

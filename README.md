@@ -7,11 +7,11 @@ Reimplementation of jquery Thailand in pure React focus on highly customizable r
 ![Demo](./assets/demo.gif)
 
 ## Feature
-- [x] Customizable layout
-- [x] Custom datasource option 
-- [x] Keyboard navigation support
-- [ ] Lazy Server Side datasource support
-- [ ] Form validation support
+- ✅ Customizable layout
+- ✅ Custom datasource option 
+- ✅ Keyboard navigation support
+- 🚧 Lazy Server Side datasource support
+- ️🚧 Form validation support
 
 ## Original Idea
 [jquery.Thailand.js](https://github.com/earthchie/jquery.Thailand.js)
@@ -63,6 +63,30 @@ const App = () => {
     </ThailandAddressTypeahead>
   );
 };
+```
+
+### With Create React App
+```tsx
+// App.js
+import './App.css';
+import { ThailandAddressTypeahead, ThailandAddressValue } from 'react-thailand-address-typeahead'
+import { useState } from 'react';
+
+function App() {
+  const [val ,setVal] = useState(ThailandAddressValue.empty())
+  return (
+    <div className="App">
+      <ThailandAddressTypeahead value={val} onValueChange={(val) => {
+        setVal({...val})
+      }}>
+        <ThailandAddressTypeahead.PostalCodeInput />
+        <ThailandAddressTypeahead.Suggestion />
+      </ThailandAddressTypeahead>
+    </div>
+  );
+}
+
+export default App;
 ```
 
 

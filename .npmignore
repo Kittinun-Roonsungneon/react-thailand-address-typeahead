@@ -5,3 +5,13 @@ jquery.Thailand.js
 .babelrc
 webpack.config.js
 src
+lib
+storybook-static
+stories
+.gitignore
+jest.config.js
+assets
+README.md
+tsconfig.json
+webpack.config.js
+yarn.lock
