@@ -37,7 +37,7 @@ export const extractDatasource = (cds: CompressedDatasource): DatasourceItem[] =
           ds.push({
             d: districtName,
             p: provinceName,
-            po: postcode + '',
+            po: postcode + "",
             s: subdistrictName,
           });
         });
@@ -47,16 +47,11 @@ export const extractDatasource = (cds: CompressedDatasource): DatasourceItem[] =
   return ds;
 };
 
-export const searchDatasourceByField = (
-  ds: DatasourceItem[],
-  field: "po" | "p" | "d" | "s",
-  input: string,
-  max = 10,
-) => {
-  const result: DatasourceItem[] = []
+export const searchDatasourceByField = (ds: DatasourceItem[], field: "po" | "p" | "d" | "s", input: string, max = 10) => {
+  const result: DatasourceItem[] = [];
   for (const item of ds) {
     if (item[field].toLowerCase().includes(input.toLocaleLowerCase())) {
-      result.push(item)
+      result.push(item);
     }
     if (result.length >= max) {
       break;
@@ -65,9 +60,7 @@ export const searchDatasourceByField = (
   return result;
 };
 
-export function useThailandAddressDatasource(
-  ds = extractDatasource(staticAddrSource)
-) {
+export function useThailandAddressDatasource(ds = extractDatasource(staticAddrSource)) {
   const searchByField = useCallback(
     (field: "po" | "p" | "d" | "s", input: string) => {
       return searchDatasourceByField(ds, field, input);

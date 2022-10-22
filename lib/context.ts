@@ -41,13 +41,8 @@ export const ThailandAddressValue = {
 export type TypeaheadAdressContextData = {
   value: ThailandAddressValue;
   onValueChange?: (nextVal: ThailandAddressValue) => void;
-  onInputFieldChange: (
-    fieldName: keyof ThailandAddressValue,
-    inputText: string
-  ) => void;
-  searchByField: ReturnType<
-    typeof useThailandAddressDatasource
-  >["searchByField"];
+  onInputFieldChange: (fieldName: keyof ThailandAddressValue, inputText: string) => void;
+  searchByField: ReturnType<typeof useThailandAddressDatasource>["searchByField"];
 
   suggestionContainerElem: Element | null;
   setSuggestionContainerElem: (e: Element | null) => void;
@@ -59,18 +54,15 @@ export type TypeaheadAdressContextData = {
   setShouldDisplaySuggestion: (v: boolean) => void;
 
   highlightedItemIndex: number;
-  setHighlightedItemIndex: (v: number) => void
+  setHighlightedItemIndex: (v: number) => void;
 };
 
-export const typeaheadAddressContext =
-  createContext<TypeaheadAdressContextData | null>(null);
+export const typeaheadAddressContext = createContext<TypeaheadAdressContextData | null>(null);
 
 export function useAddressTypeaheadContext() {
   const ctx = useContext(typeaheadAddressContext);
   if (!ctx) {
-    throw new Error(
-      "invalid context provider, make sure you place this component under ThailandAddressTypeahead"
-    );
+    throw new Error("invalid context provider, make sure you place this component under ThailandAddressTypeahead");
   }
   return ctx;
 }

@@ -8,7 +8,7 @@ Reimplementation of jquery Thailand in pure React focus on highly customizable r
 
 ## Feature
 - ✅ Customizable layout
-- ✅ Custom datasource option 
+- ✅ Custom datasource option (See [Storybook Custom Option](https://zapkub.github.io/react-thailand-address-v2/?path=/docs/thailand-address-typeahead--custom-datasource-usage#custom-datasource-usage))
 - ✅ Keyboard navigation support
 - 🚧 Lazy Server Side datasource support
 - ️🚧 Form validation support
@@ -52,11 +52,14 @@ const App = () => {
       onValueChange={(val) => setVal(val)}
       datasouce={customDatasource}
     >
-      {/** you can put any customizable layout here */}
       <ThailandAddressTypeahead.SubdistrictInput placeholder="Tumbon" />
       <ThailandAddressTypeahead.DistrictInput placeholder="Amphoe" />
-      <ThailandAddressTypeahead.ProvinceInput placeholder="Province" />
-      <ThailandAddressTypeahead.PostalCodeInput placeholder="Postal Code" />
+
+      {/** you can put any customizable layout like below */}
+      <div>
+        <ThailandAddressTypeahead.ProvinceInput placeholder="Province" />
+        <ThailandAddressTypeahead.PostalCodeInput placeholder="Postal Code" />
+      </div>
 
       <ThailandAddressTypeahead.Suggestion />
       { /** or custom our own suggestion with CustomSuggestion */ }
@@ -95,5 +98,4 @@ export default App;
 [earthchie](https://github.com/earthchie/) - Project Owner, Original fork
 (you should treat him a beer 😎🍺)
 ## License
-- Original : WTFPL 2.0 http://www.wtfpl.net/
-- Also MIT (formally)
+MIT

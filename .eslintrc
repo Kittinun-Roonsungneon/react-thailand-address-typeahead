@@ -1,6 +1,8 @@
 {
     "parser": "@typescript-eslint/parser",
     "plugins": ["@typescript-eslint"],
-    "rules": { },
+    "rules": { 
+      "max-len": ["warn", { "code": 250 }]
+    },
     "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended", "plugin:react/recommended",   "plugin:react-hooks/recommended"]
   }

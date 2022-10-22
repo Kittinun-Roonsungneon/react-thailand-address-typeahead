@@ -1,5 +1,3 @@
-import React from "react";
-import renderer from "react-test-renderer";
 import staticAddrSource from "./static-addr-source";
 import { extractDatasource, searchDatasourceByField } from "./use-thailand-addr";
 
