@@ -8,6 +8,7 @@ Reimplementation of jquery Thailand in pure React focus on highly customizable r
 
 ## Feature
 - ✅ Customizable layout
+- ✅ Fully customizable CSS
 - ✅ Custom datasource option (See [Storybook Custom Option](https://zapkub.github.io/react-thailand-address-v2/?path=/docs/thailand-address-typeahead--custom-datasource-usage#custom-datasource-usage))
 - ✅ Keyboard navigation support
 - 🚧 Lazy Server Side datasource support

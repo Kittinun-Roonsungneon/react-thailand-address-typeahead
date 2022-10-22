@@ -1,12 +1,18 @@
 
 .basic.address-input-container {
-    width: 300px;
+    width: 800px;
+    margin: 40px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .basic .address-input-field-container {
     position: relative;
 }
 .basic .address-input-field {
+    width: 450px;
     margin: 2px 4px;
     padding: 4px 8px;
     border: 2px solid darkgray;
