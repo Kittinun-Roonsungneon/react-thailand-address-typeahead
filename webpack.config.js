@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 // Generated using webpack-cli https://github.com/webpack/webpack-cli
 
 const path = require("path");
@@ -21,7 +23,8 @@ const config = {
   devtool: 'source-map',
   plugins: [ ],
   externals: {
-    react: 'react'
+    react: 'react',
+    'react-dom': 'react-dom',
   },
   module: {
     rules: [
