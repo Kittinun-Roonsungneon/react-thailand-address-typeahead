@@ -17,8 +17,6 @@ Reimplementation of jquery Thailand in pure React focus on highly customizable r
 - 🚧 Lazy Server Side datasource support
 - ️🚧 Form validation support
 
-[jquery.Thailand.js](https://github.com/earthchie/jquery.Thailand.js)
-
 ## Demo
 [Example with storybook](http://zapkub.github.io/react-thailand-address-v2)
 
@@ -94,6 +92,13 @@ function App() {
 
 export default App;
 ```
+
+
+# Stats for nerd 🤓
+- The gzip result will be around `69KB` according to https://unpkg.com/react-thailand-address-typeahead@2.0.1/dist/index.js
+- The performance of searching is WIP
+
+
 
 
 ## Original fork and idea 
